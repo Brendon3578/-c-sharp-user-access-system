@@ -55,29 +55,20 @@ namespace UserAccessWatcherSystem
             foreach (var user in userAccessList)
             {
                 var accessDateString = user.access_date.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture);
-                if (accessByDate.TryGetValue(accessDateString, out var currentAccess))
+
+                if (!accessByDate.ContainsKey(accessDateString))
                 {
-                    if (currentAccess == null)
-                    {
-                        Console.WriteLine("HashSet don't exists! error");
-                        continue;
-                    }
-                    currentAccess.Add(user);
+                    accessByDate[accessDateString] = new HashSet<UserAccess>();
                 }
-                else
-                {
-                    var newuserAccessList = new HashSet<UserAccess>() { user };
-                    accessByDate.Add(accessDateString, newuserAccessList);
-                }
+
+                accessByDate[accessDateString].Add(user);
             }
 
             foreach (var (date, accessInDay) in accessByDate)
             {
                 Console.WriteLine($"\n┌──── Access in {date} ───");
                 foreach (var access in accessInDay)
-                {
                     Console.WriteLine($"├─ {access}");
-                }
                 Console.WriteLine("└─────────────────────────────");
             }
         }
