@@ -11,7 +11,7 @@ namespace UserAccessWatcherSystem
             //Console.Write("Enter file full path: ");
             //string usersAccessFilePath = Console.ReadLine() ?? "";
             string currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            string relativeFilePath = Path.Combine(currentDirectory, @"..\..\..\user-access.json");
+            string relativeFilePath = Path.Combine(currentDirectory, @"..\..\..\Data\user-access.json");
             string usersAccessFilePath = Path.GetFullPath(relativeFilePath);
 
             var userAccessList = new List<UserAccess>();
